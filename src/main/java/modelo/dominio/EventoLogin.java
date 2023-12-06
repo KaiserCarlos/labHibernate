@@ -4,11 +4,14 @@ package modelo.dominio;
 import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class EventoLogin {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //El SGBD genera automaticamente el id para las tuplas, ya que sino tendriamos que hacerlo manualmente
 	private Long id;
 	private String descripcion;
 	private Date fecha;
