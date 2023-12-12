@@ -12,9 +12,11 @@
   <property name="hibernate.connection.autocommit">false</property>
   <property name="hibernate.current_session_context_class">thread</property>
   <property name="hibernate.hbm2ddl.auto">create</property>
-  <property name="hibernate.show_sql">false</property>
+  <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <mapping class="modelo.dominio.EventoLogin"/>
   <mapping class="modelo.dominio.Usuario" />
+  <mapping class="modelo.dominio.Maquina" />
+  <mapping class="modelo.dominio.Persona" />
  </session-factory>
 </hibernate-configuration>

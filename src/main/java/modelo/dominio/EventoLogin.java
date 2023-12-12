@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class EventoLogin {
 	
@@ -20,7 +23,8 @@ public class EventoLogin {
 	private String descripcion;
 	@Column(nullable = false)
 	private Date fecha;
-	@ManyToOne(targetEntity=Usuario.class,cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@ManyToOne(targetEntity=Usuario.class,cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+	@Fetch(value = FetchMode.JOIN)
 	private Usuario usuario;
 	private boolean login;
 	public EventoLogin() {}
