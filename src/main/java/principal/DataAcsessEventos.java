@@ -84,7 +84,6 @@ public class DataAcsessEventos {
 	boolean res=e.deleteUsuario ("Nekane");
 	System.out.println(e.getEventosLogin());
 	
-	
 	usua= e.createAndStoreUsuarioConEventoLogin ("Peru","128","alumno",true,new Date());
 	System.out.println("=> " + e.getUsuarios());
 	System.out.println("=> " + e.getEventosLogin());
@@ -98,10 +97,6 @@ public class DataAcsessEventos {
 	
 	
 	}
-	
-	
-	
-	
 	
 	public List<EventoLogin> getEventosLogin() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -147,25 +142,25 @@ public class DataAcsessEventos {
 			List<EventoLogin> result=c.list();
 			session.getTransaction().commit();
 			return result;
-			}
+		}
 		
 		public boolean deleteUsuario(String usuario) {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			session.beginTransaction();
-			try {
-			Usuario u=(Usuario)session.get(Usuario.class, usuario);
-			Query q = session.createQuery("delete from EventoLogin where usuario = :usua");
-			q.setParameter("usua", u);
-			q.executeUpdate();
-			session.delete(u);
-			session.getTransaction().commit();
-			}
-			catch (Exception ex)
-			{ System.out.println("Error: "+ex.toString());
-			return false;
-			}
-			return true;
-			}
+				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+				session.beginTransaction();
+				try {
+					Usuario u=(Usuario)session.get(Usuario.class, usuario);
+					//Query q = session.createQuery("delete from EventoLogin where usuario = :usua");
+					//q.setParameter("usua", u);
+					//q.executeUpdate();
+					session.delete(u);
+					session.getTransaction().commit();
+				}
+				catch (Exception ex)
+				{ System.out.println("Error: "+ex.toString());
+				return false;
+				}
+				return true;
+		}
 		
 		public Usuario createAndStoreUsuarioConEventoLogin
 		(String nombre, String password, String tipo, boolean login, Date fecha)
@@ -183,13 +178,17 @@ public class DataAcsessEventos {
 		//HashSet es = new HashSet();
 		//es.add(lg);
 		//u.setEventos(es);
-		//session.save(u);
+		//HashSet es = new HashSet();
+		//es.add(lg);
+		//u.setEventos(es);
+		session.save(u);
 		session.save(lg);
 		session.getTransaction().commit();
 		return u;
 		}
 		
 		public Usuario getUsuario(String usuario) {
+			
 			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 			session.beginTransaction();
 			Query q = session.createQuery("select lg.usuario from EventoLogin lg where nombre=:usuario");
@@ -197,8 +196,7 @@ public class DataAcsessEventos {
 			List result=q.list();
 			session.getTransaction().commit();
 			return (Usuario)result.get(0);
-			}
 		
+		}
 		
-	
 }
